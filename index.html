@@ -222,6 +222,17 @@
                     </div>
                     <p class="text-gray-500 text-sm mt-4 italic">Drag or use arrows to view</p>
                 </section>
+
+                <!-- Mini Project Section -->
+                <section id="project" class="text-center card rounded-2xl p-8 md:p-12">
+                    <h3 class="text-2xl md:text-3xl font-bold mb-4">Check Out My Mini-Project</h3>
+                    <p class="text-gray-400 max-w-xl mx-auto mb-6">
+                        This is a mini-project called Stock Data AI. Check it out!
+                    </p>
+                    <a href="https://website-sage-delta-12.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-block bg-white text-black font-bold py-3 px-8 rounded-lg text-lg hover:bg-gray-300 transition-colors duration-300 shadow-lg">
+                        Visit Stock Data AI
+                    </a>
+                </section>
             </div>
         </main>
         
@@ -231,11 +242,8 @@
         </footer>
     </div>
 
-    <!-- JavaScript for Bookshelf Drag & Fluid Gradient Background -->
+    <!-- JavaScript for Bookshelf Drag -->
     <script>
-        /**
-         * Bookshelf Drag-to-Scroll & Arrow Logic
-         */
         document.addEventListener('DOMContentLoaded', () => {
             const slider = document.getElementById('bookshelf-container');
             const scrollLeftBtn = document.getElementById('scroll-left');
@@ -291,112 +299,6 @@
                 }
             }
         });
-
-        /**
-         * GradientAnimator - A class to create a fluid, animated gradient on a canvas.
-         */
-        class GradientAnimator {
-            constructor() {
-                this.canvas = document.getElementById('gradient-canvas');
-                this.context = this.canvas.getContext('webgl');
-                this.w = window.innerWidth;
-                this.h = window.innerHeight;
-                this.startTime = Date.now();
-                this.init();
-            }
-
-            init() {
-                if (!this.context) {
-                    console.error("WebGL is not supported.");
-                    document.body.style.background = "#000";
-                    return;
-                }
-                this.resizeCanvas();
-                this.compileShaders();
-                this.createGeometry();
-                this.bindUniforms();
-                this.animate();
-                window.addEventListener('resize', () => this.resizeCanvas());
-            }
-
-            resizeCanvas() {
-                this.w = window.innerWidth;
-                this.h = window.innerHeight;
-                this.canvas.width = this.w;
-                this.canvas.height = this.h;
-                this.context.viewport(0, 0, this.w, this.h);
-            }
-
-            compileShaders() {
-                const vertexShaderSource = `attribute vec2 position; void main() { gl_Position = vec4(position, 0.0, 1.0); }`;
-                const fragmentShaderSource = `
-                    precision mediump float;
-                    uniform float u_time;
-                    uniform vec2 u_resolution;
-                    
-                    #define PI 3.14159265359
-
-                    void main() {
-                        vec2 st = gl_FragCoord.xy / u_resolution.xy;
-                        st.x *= u_resolution.x / u_resolution.y;
-
-                        // Slow, continuous motion for the grid
-                        st.x += u_time * 0.02;
-                        st.y += u_time * 0.01;
-
-                        // Scale of the grid
-                        float scale = 20.0;
-                        st *= scale;
-
-                        // Use sine waves to create stable grid lines.
-                        // `pow` makes the lines thinner and sharper. A higher value = thinner lines.
-                        float sharpness = 100.0;
-                        float line_x = pow(abs(sin(st.x * PI)), sharpness);
-                        float line_y = pow(abs(sin(st.y * PI)), sharpness);
-
-                        // `min` creates the grid pattern. `1.0 - ...` inverts it so lines are white.
-                        vec3 color = vec3(1.0 - min(line_x, line_y));
-
-                        gl_FragColor = vec4(color, 1.0);
-                    }
-                `;
-
-                const vs = this.context.createShader(this.context.VERTEX_SHADER);
-                this.context.shaderSource(vs, vertexShaderSource); this.context.compileShader(vs);
-                const fs = this.context.createShader(this.context.FRAGMENT_SHADER);
-                this.context.shaderSource(fs, fragmentShaderSource); this.context.compileShader(fs);
-                this.program = this.context.createProgram();
-                this.context.attachShader(this.program, vs); this.context.attachShader(this.program, fs);
-                this.context.linkProgram(this.program); this.context.useProgram(this.program);
-            }
-
-            createGeometry() {
-                const buffer = this.context.createBuffer();
-                this.context.bindBuffer(this.context.ARRAY_BUFFER, buffer);
-                this.context.bufferData(this.context.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), this.context.STATIC_DRAW);
-                const position = this.context.getAttribLocation(this.program, 'position');
-                this.context.enableVertexAttribArray(position);
-                this.context.vertexAttribPointer(position, 2, this.context.FLOAT, false, 0, 0);
-            }
-
-            bindUniforms() {
-                this.uResolution = this.context.getUniformLocation(this.program, 'u_resolution');
-                this.uTime = this.context.getUniformLocation(this.program, 'u_time');
-            }
-
-            animate() {
-                const elapsed = (Date.now() - this.startTime) / 1000.0;
-                this.context.uniform2f(this.uResolution, this.w, this.h);
-                this.context.uniform1f(this.uTime, elapsed);
-                this.context.drawArrays(this.context.TRIANGLE_STRIP, 0, 4);
-                requestAnimationFrame(() => this.animate());
-            }
-        }
-
-        // Initialize the animator when the window loads
-        window.onload = () => {
-            new GradientAnimator();
-        };
     </script>
 
 </body>

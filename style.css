@@ -5,7 +5,7 @@
     --glass-border: rgba(255, 255, 255, 0.08);
 }
 
-/* Lenis Recommended Reset Requirements */
+/* Lenis Scroll Engine Requirements */
 html.lenis, html.lenis body {
     height: auto;
 }
@@ -28,46 +28,39 @@ body {
 
 .font-display { font-family: 'Space Grotesk', sans-serif; }
 
-/* 1. Hardware GPU-Accelerated Grid Animation */
+/* 1. Original Grid Background (Stacking Context Fix) */
 .grid-background {
     position: fixed;
-    top: -40px;
-    left: -40px;
-    width: calc(100% + 80px);
-    height: calc(100% + 80px);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-size: 40px 40px;
     background-image:
-        linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-    z-index: -1;
+        linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    animation: moveGrid 60s linear infinite;
+    z-index: 0; /* Keeps grid visible above body #000 canvas */
     pointer-events: none;
-    /* Move animation to GPU Transform Layer */
-    will-change: transform;
-    animation: moveGridGPU 40s linear infinite;
 }
 
-@keyframes moveGridGPU {
-    0% {
-        transform: translate3d(0, 0, 0);
-    }
-    100% {
-        transform: translate3d(40px, 40px, 0);
-    }
+@keyframes moveGrid {
+    from { background-position: 0 0; }
+    to { background-position: 1000px 1000px; }
 }
 
 .content-wrapper {
     position: relative;
-    z-index: 1;
+    z-index: 10; /* Elevates content cleanly above grid */
     width: 100%;
 }
 
-/* 2. Optimized Layer-Promoted Glassmorphism */
+/* 2. Glassmorphism Styling */
 .glass-nav {
     background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--glass-border);
-    transform: translateZ(0);
 }
 
 .glass-card {
@@ -76,17 +69,14 @@ body {
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
     border-radius: 1rem;
-    transition: border-color 0.3s ease, transform 0.3s ease;
-    /* Force GPU composition layer to prevent blur-calculation lag on scroll */
-    will-change: transform;
-    transform: translateZ(0);
+    transition: border-color 0.3s ease;
 }
 
 .glass-card:hover { 
     border-color: rgba(255, 255, 255, 0.2); 
 }
 
-/* Bento Grid Layout */
+/* Bento Grid */
 .bento-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -102,19 +92,18 @@ body {
 @media (min-width: 1024px) { .masonry-grid { column-count: 3; } }
 .masonry-item { break-inside: avoid; margin-bottom: 1.5rem; }
 
-/* Scrollbar Utilities */
+/* Utilities */
 .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 .hide-scrollbar::-webkit-scrollbar { display: none; }
 
-/* Scroll-Observer Fade Pre-states */
+/* Reveal Animations */
 .fade-element {
     opacity: 0;
-    transform: translate3d(0, 16px, 0);
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: opacity, transform;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
 .fade-element.visible {
     opacity: 1;
-    transform: translate3d(0, 0, 0);
+    transform: translateY(0);
 }

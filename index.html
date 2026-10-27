@@ -32,7 +32,7 @@
 
         .font-display { font-family: 'Space Grotesk', sans-serif; }
 
-        /* Exact Original Animated Grid Background */
+        /* Animated CSS Grid Background */
         .grid-background {
             position: fixed;
             top: 0;
@@ -72,12 +72,14 @@
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--glass-border);
             border-radius: 1rem;
-            transition: border-color 0.3s ease;
+            transition: border-color 0.3s ease, transform 0.3s ease;
         }
 
-        .glass-card:hover { border-color: rgba(255, 255, 255, 0.2); }
+        .glass-card:hover { 
+            border-color: rgba(255, 255, 255, 0.2); 
+        }
 
-        /* Grids */
+        /* Bento Grid */
         .bento-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -87,6 +89,7 @@
 
         @media (min-width: 768px) { .bento-col-span-2 { grid-column: span 2; } }
 
+        /* Masonry Grid */
         .masonry-grid { column-count: 1; column-gap: 1.5rem; }
         @media (min-width: 640px) { .masonry-grid { column-count: 2; } }
         @media (min-width: 1024px) { .masonry-grid { column-count: 3; } }
@@ -99,7 +102,7 @@
         .fade-element {
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
         }
         .fade-element.visible {
             opacity: 1;
@@ -109,7 +112,7 @@
 </head>
 <body class="antialiased">
 
-    <!-- Background -->
+    <!-- Background Grid -->
     <div class="grid-background"></div>
 
     <div class="content-wrapper">
@@ -121,11 +124,12 @@
                     <a href="#about" class="hover:text-white transition-colors whitespace-nowrap">About</a>
                     <a href="#projects" class="hover:text-white transition-colors whitespace-nowrap">Projects</a>
                     <a href="#photography" class="hover:text-white transition-colors whitespace-nowrap">Photography</a>
+                    <a href="#bookshelf" class="hover:text-white transition-colors whitespace-nowrap">Bookshelf</a>
                 </div>
             </nav>
         </header>
         
-        <!-- Hero -->
+        <!-- Hero Section -->
         <section id="hero" class="min-h-screen flex flex-col justify-center px-6 relative max-w-7xl mx-auto pt-20 fade-element">
             <h1 class="text-5xl md:text-8xl font-bold leading-tight tracking-tight font-display mb-4">
                 Finance, <br><span class="text-gray-500">Engineered.</span>
@@ -136,9 +140,9 @@
             </p>
         </section>
 
-        <main class="max-w-7xl mx-auto px-6 pb-32 space-y-32">
+        <main class="max-w-7xl mx-auto px-6 pb-32 space-y-24 md:space-y-32">
             
-            <!-- Bento About -->
+            <!-- Bento About Section -->
             <section id="about" class="space-y-6 pt-10 mt-[-40px]">
                 <h2 class="text-2xl font-display font-bold mb-8 fade-element">The Architecture</h2>
                 
@@ -155,7 +159,7 @@
                         </div>
                     </div>
 
-                    <!-- Tech Stack -->
+                    <!-- Tech Stack Card -->
                     <div class="glass-card p-6 md:p-8 flex flex-col justify-between fade-element">
                         <div>
                             <h3 class="text-xl font-bold mb-2">Tech Stack</h3>
@@ -168,7 +172,7 @@
                         </div>
                     </div>
 
-                    <!-- Socials -->
+                    <!-- Socials Card -->
                     <div class="glass-card p-6 md:p-8 flex flex-col justify-center gap-4 fade-element font-mono text-sm">
                         <a href="https://www.linkedin.com/in/gurtej-singh-bhamrah-5a0b85280/" target="_blank" class="flex justify-between hover:text-gray-300"><span>LinkedIn</span> <span>↗</span></a>
                         <hr class="border-white/10">
@@ -181,61 +185,62 @@
                 </div>
             </section>
 
-            <!-- Projects (Integrated) -->
-           
-<section id="projects" class="space-y-6 pt-10 mt-[-40px]">
-    <h2 class="text-2xl font-display font-bold mb-8 fade-element">Projects & Deployments</h2>
-    
-    <div class="glass-card p-6 md:p-12 flex flex-col lg:flex-row gap-8 items-center lg:items-start fade-element">
-        
-        <!-- Text Content -->
-        <div class="flex-1 space-y-4 w-full">
-            <h3 class="text-3xl font-bold">Stock Data AI</h3>
-            <p class="text-gray-400">
-                An AI-driven platform built to aggregate, analyze, and deliver actionable insights on stock market data. Utilizing advanced data processing and modern tech stacks to make finance easier to navigate.
-            </p>
-            <div class="flex gap-2 flex-wrap pb-4">
-                <span class="px-3 py-1 bg-white/10 rounded-full text-xs">AI Development</span>
-                <span class="px-3 py-1 bg-white/10 rounded-full text-xs">Financial Analytics</span>
-            </div>
-            <a href="https://website-sage-delta-12.vercel.app/" target="_blank" class="inline-block px-6 py-3 bg-white text-black font-semibold rounded-lg hover:bg-gray-300 transition-colors text-sm">
-                View Live Project
-            </a>
-        </div>
-
-        <!-- Custom LinkedIn Preview Card (Replaces the broken Iframe) -->
-        <a href="https://www.linkedin.com/feed/update/urn:li:ugcPost:7500975523905511425" target="_blank" class="w-full max-w-[400px] h-[300px] bg-black/50 rounded-xl flex-shrink-0 border border-white/10 hover:border-blue-500/50 transition-all duration-300 flex flex-col justify-center items-center group relative overflow-hidden">
-            
-            <!-- Subtle background glow on hover -->
-            <div class="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            
-            <!-- LinkedIn SVG Icon -->
-            <svg class="w-12 h-12 text-[#0A66C2] mb-4 opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 z-10" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-            </svg>
-            
-            <span class="text-gray-400 font-mono text-sm group-hover:text-white transition-colors z-10">Read the case study ↗</span>
-            <span class="text-xs text-gray-600 mt-2 z-10">via LinkedIn</span>
-        </a>
-        
-    </div>
-</section>
-
-                    <!-- LinkedIn Embed Wrapper -->
-                    <div class="w-full max-w-[504px] bg-white/5 rounded-xl overflow-hidden flex-shrink-0 border border-white/10">
-                        <iframe 
-                            src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7500975523905511425" 
-                            height="693" 
-                            width="100%" 
-                            frameborder="0" 
-                            allowfullscreen="" 
-                            title="Embedded post">
-                        </iframe>
+            <!-- Projects & Deployments Section (Two Modular Cards) -->
+            <section id="projects" class="space-y-6 pt-10 mt-[-40px]">
+                <h2 class="text-2xl font-display font-bold mb-8 fade-element">Projects & Deployments</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 fade-element">
+                    
+                    <!-- Tile 1: Stock Data AI -->
+                    <div class="glass-card p-6 md:p-8 flex flex-col justify-between space-y-6">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-2xl font-bold">Stock Data AI</h3>
+                                <span class="text-xs px-2.5 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full font-mono">Live App</span>
+                            </div>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                An AI-driven platform built to aggregate, analyze, and deliver automated market insights on stock data using modern analytics pipelines.
+                            </p>
+                        </div>
+                        <div>
+                            <div class="flex gap-2 flex-wrap mb-6">
+                                <span class="px-3 py-1 bg-white/10 rounded-full text-xs">AI Development</span>
+                                <span class="px-3 py-1 bg-white/10 rounded-full text-xs">Python / APIs</span>
+                                <span class="px-3 py-1 bg-white/10 rounded-full text-xs">Financial Analytics</span>
+                            </div>
+                            <a href="https://website-sage-delta-12.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full py-3 bg-white text-black font-semibold rounded-lg hover:bg-gray-200 transition-colors text-sm">
+                                View Stock Data AI ↗
+                            </a>
+                        </div>
                     </div>
+
+                    <!-- Tile 2: Apple Ratio & DuPont Analysis -->
+                    <div class="glass-card p-6 md:p-8 flex flex-col justify-between space-y-6">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-2xl font-bold">Apple Ratio & DuPont Analysis</h3>
+                                <span class="text-xs px-2.5 py-1 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full font-mono">Research</span>
+                            </div>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                Financial breakdown and equity research detailing Apple Inc.'s operational profitability, asset turnover, financial leverage, and ROE breakdown.
+                            </p>
+                        </div>
+                        <div>
+                            <div class="flex gap-2 flex-wrap mb-6">
+                                <span class="px-3 py-1 bg-white/10 rounded-full text-xs">Equity Research</span>
+                                <span class="px-3 py-1 bg-white/10 rounded-full text-xs">DuPont Framework</span>
+                                <span class="px-3 py-1 bg-white/10 rounded-full text-xs">Financial Modeling</span>
+                            </div>
+                            <a href="https://www.linkedin.com/feed/update/urn:li:ugcPost:7500975523905511425" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full py-3 bg-[#0A66C2] text-white font-semibold rounded-lg hover:bg-[#084e96] transition-colors text-sm gap-2">
+                                Read on LinkedIn ↗
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
             </section>
 
-            <!-- Photography -->
+            <!-- Photography Section (Fixed Image URLs) -->
             <section id="photography" class="space-y-6 pt-10 mt-[-40px]">
                 <div class="flex flex-wrap justify-between items-end gap-2 mb-8 fade-element">
                     <h2 class="text-2xl font-display font-bold">Lens Work</h2>
@@ -243,22 +248,28 @@
                 </div>
                 
                 <div class="masonry-grid fade-element">
-                    <!-- Replace with your actual photo URLs -->
-                    <div class="masonry-item glass-card p-2"><img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?q=80&w=800&auto=format&fit=crop" alt="Photo" class="rounded-lg w-full"></div>
-                    <div class="masonry-item glass-card p-2"><img src="https://images.unsplash.com/photo-1517409249767-f3d9b4b0eb10?q=80&w=800&auto=format&fit=crop" alt="Photo" class="rounded-lg w-full"></div>
-                    <div class="masonry-item glass-card p-2"><img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=800&auto=format&fit=crop" alt="Photo" class="rounded-lg w-full"></div>
+                    <div class="masonry-item glass-card p-2">
+                        <img src="https://images.unsplash.com/photo-1514565131-fce0801e5785?q=80&w=800&auto=format&fit=crop" alt="Urban Street Photography" class="rounded-lg w-full object-cover">
+                    </div>
+                    <div class="masonry-item glass-card p-2">
+                        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800&auto=format&fit=crop" alt="Cinematic Landscape" class="rounded-lg w-full object-cover">
+                    </div>
+                    <div class="masonry-item glass-card p-2">
+                        <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=800&auto=format&fit=crop" alt="Event Photography" class="rounded-lg w-full object-cover">
+                    </div>
                 </div>
             </section>
 
-            <!-- Bookshelf -->
+            <!-- Bookshelf Section -->
             <section id="bookshelf" class="space-y-6 pt-10 mt-[-40px] overflow-hidden">
                 <h2 class="text-2xl font-display font-bold mb-8 fade-element">Currently Reading</h2>
                 
                 <div id="bookshelf-container" class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 fade-element hide-scrollbar">
-                    <img src="https://m.media-amazon.com/images/I/71XEsXS5RlL.jpg" class="h-48 md:h-64 snap-center rounded shadow-lg hover:-translate-y-2 transition-transform cursor-pointer" alt="Psychology of Money">
+                    <img src="https://m.media-amazon.com/images/I/71XEsXS5RlL.jpg" class="h-48 md:h-64 snap-center rounded shadow-lg hover:-translate-y-2 transition-transform cursor-pointer" alt="The Psychology of Money">
                     <img src="https://m.media-amazon.com/images/I/81wr8n5+vhL.jpg" class="h-48 md:h-64 snap-center rounded shadow-lg hover:-translate-y-2 transition-transform cursor-pointer" alt="Coffee Can Investing">
                     <img src="https://m.media-amazon.com/images/I/51lUeX6L2BL.jpg" class="h-48 md:h-64 snap-center rounded shadow-lg hover:-translate-y-2 transition-transform cursor-pointer" alt="Naval Ravikant">
                     <img src="https://m.media-amazon.com/images/I/61J3Uu4jOLL.jpg" class="h-48 md:h-64 snap-center rounded shadow-lg hover:-translate-y-2 transition-transform cursor-pointer" alt="48 Laws of Power">
+                    <img src="https://m.media-amazon.com/images/I/81l3rZK4lnL.jpg" class="h-48 md:h-64 snap-center rounded shadow-lg hover:-translate-y-2 transition-transform cursor-pointer" alt="The Alchemist">
                 </div>
                 <p class="text-gray-500 text-sm mt-2 italic text-center fade-element">Swipe or drag to view</p>
             </section>
@@ -270,10 +281,11 @@
         </footer>
     </div>
 
-    <!-- Scroll & Drag Logic -->
+    <!-- JavaScript for Animations & Bookshelf Drag -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // Smooth Scroll Fade In
+            const observerOptions = { root: null, rootMargin: "0px", threshold: 0.1 };
+
             const observer = new IntersectionObserver((entries, obs) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -281,11 +293,10 @@
                         obs.unobserve(entry.target); 
                     }
                 });
-            }, { root: null, rootMargin: "0px", threshold: 0.1 });
+            }, observerOptions);
 
             document.querySelectorAll(".fade-element").forEach(el => observer.observe(el));
 
-            // Bookshelf Drag functionality
             const slider = document.getElementById('bookshelf-container');
             if (slider) {
                 let isDown = false;

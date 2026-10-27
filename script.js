@@ -14,12 +14,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }));
   }
 
+  const carousel = document.querySelector("[data-carousel]");
+  if (carousel) {
+    const moveCarousel = (direction) => carousel.scrollBy({ left: direction * Math.min(carousel.clientWidth * .82, 410), behavior: "smooth" });
+    document.querySelector("[data-carousel-prev]")?.addEventListener("click", () => moveCarousel(-1));
+    document.querySelector("[data-carousel-next]")?.addEventListener("click", () => moveCarousel(1));
+  }
+
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let lenis;
   if (!reduced && window.Lenis) {
-    lenis = new Lenis({ duration: 1.05, easing: (t) => 1 - Math.pow(1 - t, 4), smoothWheel: true, wheelMultiplier: 0.86, touchMultiplier: 1.2 });
-    const raf = (time) => { lenis.raf(time); requestAnimationFrame(raf); };
-    requestAnimationFrame(raf);
+    lenis = new Lenis({ duration: .88, easing: (t) => 1 - Math.pow(1 - t, 4), smoothWheel: true, wheelMultiplier: .78, touchMultiplier: 1.15, syncTouch: false });
+    let frameId;
+    const raf = (time) => { lenis.raf(time); frameId = requestAnimationFrame(raf); };
+    frameId = requestAnimationFrame(raf);
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) { cancelAnimationFrame(frameId); }
+      else { frameId = requestAnimationFrame(raf); }
+    });
     document.querySelectorAll('a[href^="#"]').forEach((link) => link.addEventListener("click", (event) => {
       const target = document.querySelector(link.getAttribute("href"));
       if (target) { event.preventDefault(); lenis.scrollTo(target, { offset: -18, duration: .9 }); }

@@ -13,10 +13,122 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Core Variables & Resets */
+        :root {
+            --bg-dark: #000;
+            --glass-bg: rgba(20, 20, 20, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .font-display {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* 1. Exact Original Animated Grid Background */
+        .grid-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: 40px 40px; /* Grid spacing */
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            animation: moveGrid 60s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes moveGrid {
+            from { background-position: 0 0; }
+            to { background-position: 1000px 1000px; }
+        }
+
+        /* 2. Content Wrapper */
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+        }
+
+        /* 3. Glassmorphism Utilities */
+        .glass-nav {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 1rem;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* 4. Bento Grid Layout */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            grid-auto-rows: minmax(200px, auto);
+        }
+
+        @media (min-width: 768px) {
+            .bento-col-span-2 {
+                grid-column: span 2;
+            }
+        }
+
+        /* 5. Masonry Grid (CSS Columns) */
+        .masonry-grid {
+            column-count: 1;
+            column-gap: 1.5rem;
+        }
+        @media (min-width: 640px) { .masonry-grid { column-count: 2; } }
+        @media (min-width: 1024px) { .masonry-grid { column-count: 3; } }
+
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+        }
+
+        /* 6. Scroll Utilities & Animations */
+        .hide-scrollbar {
+            -ms-overflow-style: none; 
+            scrollbar-width: none;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Pre-state for JS Intersection Observer */
+        .fade-element {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .fade-element.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
-<body class="bg-black text-white antialiased">
+<body class="antialiased">
 
     <!-- Animated CSS Grid Background -->
     <div class="grid-background"></div>
@@ -25,9 +137,9 @@
         <!-- Navigation -->
         <header class="glass-nav fixed top-0 left-0 right-0 z-50">
             <nav class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-                <a href="index.html" class="text-xl font-bold font-display tracking-tight">Gurtej Singh</a>
+                <a href="#hero" class="text-xl font-bold font-display tracking-tight">Gurtej Singh</a>
                 <div class="flex items-center space-x-6 text-sm text-gray-300">
-                    <a href="projects.html" class="hover:text-white transition-colors">Projects</a>
+                    <a href="https://website-sage-delta-12.vercel.app/" target="_blank" class="hover:text-white transition-colors">Stock Data AI ↗</a>
                     <a href="#about" class="hover:text-white transition-colors">About</a>
                     <a href="#bookshelf" class="hover:text-white transition-colors">Bookshelf</a>
                 </div>
@@ -52,7 +164,7 @@
                 <h2 class="text-2xl font-display font-bold mb-8 fade-element">The Architecture</h2>
                 
                 <div class="bento-grid">
-                    <!-- Finance Card (Spans 2 columns) -->
+                    <!-- Finance Card -->
                     <div class="glass-card bento-col-span-2 p-8 flex flex-col justify-between fade-element">
                         <div>
                             <h3 class="text-xl font-bold mb-2">Corporate Finance & Strategy</h3>
@@ -93,6 +205,11 @@
                             <span class="font-medium">X (Twitter)</span>
                             <span class="text-gray-500 group-hover:text-white transition-colors">↗</span>
                         </a>
+                        <hr class="border-white/10">
+                        <a href="https://www.instagram.com/gurtej06_/" target="_blank" class="flex items-center justify-between group">
+                            <span class="font-medium">Instagram</span>
+                            <span class="text-gray-500 group-hover:text-white transition-colors">↗</span>
+                        </a>
                     </div>
                 </div>
             </section>
@@ -125,15 +242,76 @@
                     <img src="https://m.media-amazon.com/images/I/61J3Uu4jOLL.jpg" class="h-64 snap-center rounded shadow-lg hover:-translate-y-2 transition-transform cursor-pointer" alt="48 Laws of Power">
                     <img src="https://m.media-amazon.com/images/I/81l3rZK4lnL.jpg" class="h-64 snap-center rounded shadow-lg hover:-translate-y-2 transition-transform cursor-pointer" alt="The Alchemist">
                 </div>
+                <p class="text-gray-500 text-sm mt-4 italic text-center fade-element">Swipe or drag to view</p>
             </section>
 
         </main>
         
         <footer class="border-t border-white/10 text-center p-8 text-sm text-gray-500 font-mono">
-            &copy; 2026 Gurtej Singh. Built for deployment.
+            &copy; 2026 Gurtej Singh. All Rights Reserved.
         </footer>
     </div>
 
-    <script src="script.js"></script>
+    <!-- JavaScript integrated for Scroll Animations & Bookshelf Drag -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // 1. Intersection Observer for Scroll Animations
+            const observerOptions = {
+                root: null,
+                rootMargin: "0px",
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        observer.unobserve(entry.target); // Run once
+                    }
+                });
+            }, observerOptions);
+
+            const fadeElements = document.querySelectorAll(".fade-element");
+            fadeElements.forEach(el => observer.observe(el));
+
+            // 2. Desktop Drag-to-Scroll for Bookshelf
+            const slider = document.getElementById('bookshelf-container');
+            
+            if (slider) {
+                let isDown = false;
+                let startX;
+                let scrollLeft;
+
+                slider.addEventListener('mousedown', (e) => {
+                    isDown = true;
+                    slider.style.cursor = 'grabbing';
+                    slider.style.scrollSnapType = 'none'; 
+                    startX = e.pageX - slider.offsetLeft;
+                    scrollLeft = slider.scrollLeft;
+                });
+
+                slider.addEventListener('mouseleave', () => {
+                    isDown = false;
+                    slider.style.cursor = 'grab';
+                    slider.style.scrollSnapType = 'x mandatory';
+                });
+
+                slider.addEventListener('mouseup', () => {
+                    isDown = false;
+                    slider.style.cursor = 'grab';
+                    slider.style.scrollSnapType = 'x mandatory'; 
+                });
+
+                slider.addEventListener('mousemove', (e) => {
+                    if (!isDown) return;
+                    e.preventDefault();
+                    const x = e.pageX - slider.offsetLeft;
+                    const walk = (x - startX) * 1.5; 
+                    slider.scrollLeft = scrollLeft - walk;
+                });
+            }
+        });
+    </script>
 </body>
 </html>

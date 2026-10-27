@@ -8,132 +8,32 @@
     <!-- Tailwind via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- Lenis Smooth Scroll CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     
-    <style>
-        /* Core Variables & Resets */
-        :root {
-            --bg-dark: #000;
-            --glass-bg: rgba(20, 20, 20, 0.4);
-            --glass-border: rgba(255, 255, 255, 0.08);
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-dark);
-            color: #fff;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        .font-display { font-family: 'Space Grotesk', sans-serif; }
-
-        /* Hardware-Accelerated Animated Grid Background */
-        .grid-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: 40px 40px;
-            background-image:
-                linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-            animation: moveGrid 60s linear infinite;
-            z-index: -1;
-            /* Force GPU layer composition to eliminate scroll jitter */
-            will-change: background-position;
-            transform: translateZ(0);
-        }
-
-        @keyframes moveGrid {
-            from { background-position: 0 0; }
-            to { background-position: 1000px 1000px; }
-        }
-
-        .content-wrapper {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-        }
-
-        /* Glassmorphism Utilities */
-        .glass-nav {
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--glass-border);
-        }
-
-        .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border);
-            border-radius: 1rem;
-            transition: border-color 0.3s ease, transform 0.3s ease;
-            transform: translateZ(0);
-        }
-
-        .glass-card:hover { 
-            border-color: rgba(255, 255, 255, 0.2); 
-        }
-
-        /* Bento Grid */
-        .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            grid-auto-rows: minmax(200px, auto);
-        }
-
-        @media (min-width: 768px) { .bento-col-span-2 { grid-column: span 2; } }
-
-        /* Masonry Grid */
-        .masonry-grid { column-count: 1; column-gap: 1.5rem; }
-        @media (min-width: 640px) { .masonry-grid { column-count: 2; } }
-        @media (min-width: 1024px) { .masonry-grid { column-count: 3; } }
-        .masonry-item { break-inside: avoid; margin-bottom: 1.5rem; }
-
-        /* Scroll & Smooth Animation Tweaks */
-        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-
-        /* Optimized smooth scroll reveals */
-        .fade-element {
-            opacity: 0;
-            transform: translateY(14px);
-            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: opacity, transform;
-        }
-        .fade-element.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
+    <!-- Custom Modular Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body class="antialiased">
 
-    <!-- Background Grid -->
+    <!-- GPU-Accelerated Background Grid -->
     <div class="grid-background"></div>
 
     <div class="content-wrapper">
         <!-- Navigation -->
         <header class="glass-nav fixed top-0 left-0 right-0 z-50">
             <nav class="max-w-7xl mx-auto px-6 py-4 flex flex-wrap justify-between items-center gap-4">
-                <a href="#hero" class="text-xl font-bold font-display tracking-tight nav-link">Gurtej Singh</a>
+                <a href="#hero" class="text-xl font-bold font-display tracking-tight scroll-link">Gurtej Singh</a>
                 <div class="flex items-center space-x-4 md:space-x-6 text-sm text-gray-300 overflow-x-auto hide-scrollbar">
-                    <a href="#about" class="hover:text-white transition-colors whitespace-nowrap nav-link">About</a>
-                    <a href="#projects" class="hover:text-white transition-colors whitespace-nowrap nav-link">Projects</a>
-                    <a href="#photography" class="hover:text-white transition-colors whitespace-nowrap nav-link">Photography</a>
-                    <a href="#bookshelf" class="hover:text-white transition-colors whitespace-nowrap nav-link">Bookshelf</a>
+                    <a href="#about" class="hover:text-white transition-colors whitespace-nowrap scroll-link">About</a>
+                    <a href="#projects" class="hover:text-white transition-colors whitespace-nowrap scroll-link">Projects</a>
+                    <a href="#photography" class="hover:text-white transition-colors whitespace-nowrap scroll-link">Photography</a>
+                    <a href="#bookshelf" class="hover:text-white transition-colors whitespace-nowrap scroll-link">Bookshelf</a>
                 </div>
             </nav>
         </header>
@@ -148,9 +48,9 @@
                 Merging high finance, strategic valuation, and AI development.
             </p>
 
-            <!-- Smooth Scroll Trigger Button -->
+            <!-- Lenis-Triggered Smooth Scroll Button -->
             <div class="flex items-center">
-                <a href="#about" id="scroll-btn" class="px-6 py-3 bg-white text-black font-medium rounded-lg hover:bg-gray-200 transition-all duration-300 flex items-center gap-3 group text-sm md:text-base shadow-lg hover:shadow-white/10">
+                <a href="#about" class="scroll-link px-6 py-3 bg-white text-black font-medium rounded-lg hover:bg-gray-200 transition-all duration-300 flex items-center gap-3 group text-sm md:text-base shadow-lg hover:shadow-white/10">
                     <span>Explore Architecture</span>
                     <svg class="w-4 h-4 group-hover:translate-y-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7-7-7"></path>
@@ -300,71 +200,7 @@
         </footer>
     </div>
 
-    <!-- JavaScript for Optimized Smooth Scrolling & Bookshelf Drag -->
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            // Optimized IntersectionObserver for Smooth Reveal
-            const observerOptions = { root: null, rootMargin: "0px", threshold: 0.15 };
-
-            const observer = new IntersectionObserver((entries, obs) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("visible");
-                        obs.unobserve(entry.target); 
-                    }
-                });
-            }, observerOptions);
-
-            document.querySelectorAll(".fade-element").forEach(el => observer.observe(el));
-
-            // Custom Smooth Scroll for Anchor Links (fixes browser scroll jitter)
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-
-            // Bookshelf Drag functionality
-            const slider = document.getElementById('bookshelf-container');
-            if (slider) {
-                let isDown = false;
-                let startX;
-                let scrollLeft;
-
-                slider.addEventListener('mousedown', (e) => {
-                    isDown = true;
-                    slider.style.cursor = 'grabbing';
-                    slider.style.scrollSnapType = 'none'; 
-                    startX = e.pageX - slider.offsetLeft;
-                    scrollLeft = slider.scrollLeft;
-                });
-                slider.addEventListener('mouseleave', () => {
-                    isDown = false;
-                    slider.style.cursor = 'grab';
-                    slider.style.scrollSnapType = 'x mandatory';
-                });
-                slider.addEventListener('mouseup', () => {
-                    isDown = false;
-                    slider.style.cursor = 'grab';
-                    slider.style.scrollSnapType = 'x mandatory'; 
-                });
-                slider.addEventListener('mousemove', (e) => {
-                    if (!isDown) return;
-                    e.preventDefault();
-                    const x = e.pageX - slider.offsetLeft;
-                    const walk = (x - startX) * 1.5; 
-                    slider.scrollLeft = scrollLeft - walk;
-                });
-            }
-        });
-    </script>
+    <!-- Modular Script -->
+    <script src="script.js"></script>
 </body>
 </html>

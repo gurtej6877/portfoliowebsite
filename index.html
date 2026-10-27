@@ -5,301 +5,135 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gurtej Singh | Portfolio</title>
     
-    <!-- Tailwind CSS for styling -->
+    <!-- Tailwind via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts: Inter -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <style>
-        /* Custom styles to complement Tailwind */
-        html {
-            scroll-behavior: smooth;
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.7;
-            overflow-x: hidden;
-            background-color: #000; /* Fallback background */
-        }
-
-        /* NEW: CSS Grid Background */
-        .grid-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: 40px 40px; /* Grid spacing */
-            background-image:
-                linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-            animation: moveGrid 60s linear infinite;
-            z-index: -1;
-        }
-
-        @keyframes moveGrid {
-            from {
-                background-position: 0 0;
-            }
-            to {
-                background-position: 1000px 1000px; /* Move far away to hide looping */
-            }
-        }
-
-        /* A wrapper to allow content to scroll over the fixed background */
-        .content-wrapper {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-        }
-
-        /* Glassmorphism effect for content sections and header */
-        .card {
-            background: rgba(10, 10, 10, 0.25); 
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        
-        /* Header specific styles for a subtle look */
-        .header-card {
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        
-        /* Bookshelf styles */
-        .bookshelf {
-            perspective: 1000px;
-        }
-        .bookshelf-scroll {
-            cursor: grab;
-            user-select: none; /* Prevents text selection while dragging */
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-        }
-        .bookshelf-scroll::-webkit-scrollbar {
-            display: none; /* Chrome, Safari, and Opera */
-        }
-        .book {
-            transition: transform 0.3s ease;
-        }
-        .book:hover {
-            transform: rotateY(-15deg) scale(1.05);
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-black text-white">
+<body class="bg-black text-white antialiased">
 
-    <!-- The new grid background div -->
+    <!-- Animated CSS Grid Background -->
     <div class="grid-background"></div>
 
-    <!-- Scrollable content wrapper -->
     <div class="content-wrapper">
-
-        <!-- Minimalist Header -->
-        <header class="header-card fixed top-0 left-0 right-0 z-50">
+        <!-- Navigation -->
+        <header class="glass-nav fixed top-0 left-0 right-0 z-50">
             <nav class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-                <a href="#hero" class="text-xl font-bold tracking-tight">Gurtej Singh</a>
-                <div class="flex items-center space-x-6 text-gray-300">
-                    <a href="https://website-sage-delta-12.vercel.app/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors duration-300">Stock Data AI 📈</a>
+                <a href="index.html" class="text-xl font-bold font-display tracking-tight">Gurtej Singh</a>
+                <div class="flex items-center space-x-6 text-sm text-gray-300">
+                    <a href="projects.html" class="hover:text-white transition-colors">Projects</a>
+                    <a href="#about" class="hover:text-white transition-colors">About</a>
+                    <a href="#bookshelf" class="hover:text-white transition-colors">Bookshelf</a>
                 </div>
             </nav>
         </header>
         
-        <!-- Hero Section (Full Screen) -->
-        <section id="hero" class="min-h-screen flex flex-col justify-center items-center text-center p-6 relative">
-            <div class="max-w-4xl">
-                <h1 class="text-5xl md:text-7xl font-bold leading-tight tracking-tight">
-                    Making Finance Easy
-                </h1>
-                <p class="text-md md:text-lg text-gray-400 max-w-3xl mx-auto mt-4">
-                    Aspiring Finance Leader | Strategic Thinker with a Creator’s Mindset | Blending Business, Tech & Storytelling
-                </p>
-                <div class="mt-8">
-                     <a href="#socials" class="inline-block bg-white text-black font-bold py-3 px-8 rounded-lg text-lg hover:bg-gray-300 transition-colors duration-300 shadow-lg">
-                        Let's Connect
-                    </a>
-                </div>
-            </div>
-            <!-- Scroll Down Icon -->
-            <a href="#about" class="absolute bottom-10 animate-bounce">
-                <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-            </a>
+        <!-- Hero Section -->
+        <section id="hero" class="min-h-screen flex flex-col justify-center px-6 relative max-w-7xl mx-auto pt-20 fade-element">
+            <h1 class="text-5xl md:text-8xl font-bold leading-tight tracking-tight font-display mb-4">
+                Finance, <br><span class="text-gray-500">Engineered.</span>
+            </h1>
+            <p class="text-lg text-gray-400 max-w-2xl font-light">
+                B.Com (Hons) at Symbiosis. CFA Level 1 Candidate. <br>
+                Merging high finance, strategic valuation, and AI development.
+            </p>
         </section>
 
-        <!-- Main Content Wrapper -->
-        <main class="px-6 md:px-8 py-24 md:py-32">
-            <div class="max-w-4xl mx-auto space-y-24 md:space-y-32">
-                <!-- About Me Section -->
-                <section id="about" class="card rounded-2xl p-8 md:p-12 text-left">
-                    <h3 class="text-2xl md:text-3xl font-bold mb-8 text-center">About Me ✨</h3>
-                    <p class="text-gray-300 text-base md:text-lg">
-                        Business, creativity, and problem solving, these things keep me going ( with a strong cup of coffee ☕ ). As a commerce student focused on finance, strategy, and management, I’m passionate about linking numbers with innovation to create real impact. 📈
-                        <br><br>
-                        My entrepreneurial journey began with IndiGuide, where I built skills in leadership, adaptability, and strategic decision-making. I also have a strong interest in technology from networking and Linux to Generative AI. 💻
-                        <br><br>
-                        Outside business, I’m often behind the camera, capturing moments and refining edits. Photography has taught me perspective, storytelling, and how to shape experiences—skills I applied while judging and managing school photography competitions. 📸
-                        <br><br>
-                        Right now, I’m building expertise in finance, business, and management, exploring GenAI applications, and working to make complex concepts simple. Long-term, I’m aiming for an MBA at a top-tier school—whether IIM, Harvard, or INSEAD—and a career in Finance. 🎓
-                        <br><br>
-                        If you’re working on something meaningful in finance, business, or innovation, I’d love to connect. I’m here for genuine conversations, not just brief greetings and disappearances. 🚀
-                    </p>
-                </section>
-
-                <!-- Socials Section -->
-                <section id="socials" class="text-center">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-12">Connect With Me</h2>
-                    <div class="space-y-6 max-w-2xl mx-auto">
-                        <!-- LinkedIn Card -->
-                        <a href="https://www.linkedin.com/in/gurtej-singh-bhamrah-5a0b85280/" target="_blank" rel="noopener noreferrer" class="card rounded-xl p-6 flex items-center space-x-6 hover:scale-105 transform transition-transform duration-300">
-                            <svg class="w-10 h-10 text-white flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                            <div class="text-left">
-                                <h3 class="text-xl font-bold">LinkedIn</h3>
-                                <p class="text-gray-400">Professional Networking & Profile</p>
-                            </div>
-                        </a>
-                        <!-- GitHub Card -->
-                        <a href="https://github.com/phoenix40469" target="_blank" rel="noopener noreferrer" class="card rounded-xl p-6 flex items-center space-x-6 hover:scale-105 transform transition-transform duration-300">
-                            <svg class="w-10 h-10 text-white flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                            <div class="text-left">
-                                <h3 class="text-xl font-bold">GitHub</h3>
-                                <p class="text-gray-400">Code, Projects & Contributions</p>
-                            </div>
-                        </a>
-                        <!-- X (Twitter) Card -->
-                        <a href="https://x.com/tej06_" target="_blank" rel="noopener noreferrer" class="card rounded-xl p-6 flex items-center space-x-6 hover:scale-105 transform transition-transform duration-300">
-                            <svg class="w-10 h-10 text-white flex-shrink-0" fill="currentColor" viewBox="0 0 16 16">
-                                <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.602.75H12.6zm-1.283 12.95h1.94L4.872 1.59H2.76l8.556 12.11z"/>
-                            </svg>
-                            <div class="text-left">
-                                <h3 class="text-xl font-bold">X (Twitter)</h3>
-                                <p class="text-gray-400">Thoughts & Updates</p>
-                            </div>
-                        </a>
-                        <!-- Instagram Card -->
-                        <a href="https://www.instagram.com/gurtej06_/" target="_blank" rel="noopener noreferrer" class="card rounded-xl p-6 flex items-center space-x-6 hover:scale-105 transform transition-transform duration-300">
-                            <svg class="w-10 h-10 text-white flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44 1.441-.645 1.441-1.44-.645-1.44-1.441-1.44z"/></svg>
-                            <div class="text-left">
-                                <h3 class="text-xl font-bold">Instagram</h3>
-                                <p class="text-gray-400">Photography & Personal Updates</p>
-                            </div>
-                        </a>
-                    </div>
-                </section>
-
-                <!-- Bookshelf Section -->
-                <section id="bookshelf" class="bookshelf text-center">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-12">My Bookshelf 📚</h2>
-                    <div class="relative">
-                        <div id="bookshelf-container" class="bookshelf-scroll flex overflow-x-auto space-x-8 py-4 px-8 md:px-12">
-                            <!-- Book Covers -->
-                            <img src="https://m.media-amazon.com/images/I/81wr8n5+vhL.jpg" alt="Book cover of Coffee Can Investing" class="book h-64 shadow-lg">
-                            <img src="https://m.media-amazon.com/images/I/61J3Uu4jOLL.jpg" alt="Book cover of The 48 Laws of Power" class="book h-64 shadow-lg">
-                            <img src="https://m.media-amazon.com/images/I/71XEsXS5RlL.jpg" alt="Book cover of The Psychology of Money" class="book h-64 shadow-lg">
-                            <img src="https://m.media-amazon.com/images/I/51lUeX6L2BL.jpg" alt="Book cover of The Almanack of Naval Ravikant" class="book h-64 shadow-lg">
-                            <img src="https://m.media-amazon.com/images/I/81l3rZK4lnL.jpg" alt="Book cover of The Alchemist" class="book h-64 shadow-lg">
-                            <img src="https://m.media-amazon.com/images/I/81FPzmB5fgL._UF1000,1000_QL80_.jpg" alt="Book cover of The Alchemist" class="book h-64 shadow-lg">
-                            <img src="https://m.media-amazon.com/images/I/71E8sYS9j4L.jpg" alt="New book cover" class="book h-64 shadow-lg">
-                            <img src="https://m.media-amazon.com/images/I/611OWa8x+WL._UF1000,1000_QL80_.jpg" alt="New book cover" class="book h-64 shadow-lg">
+        <main class="max-w-7xl mx-auto px-6 pb-32 space-y-32">
+            
+            <!-- Bento Grid Section -->
+            <section id="about" class="space-y-6">
+                <h2 class="text-2xl font-display font-bold mb-8 fade-element">The Architecture</h2>
+                
+                <div class="bento-grid">
+                    <!-- Finance Card (Spans 2 columns) -->
+                    <div class="glass-card bento-col-span-2 p-8 flex flex-col justify-between fade-element">
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Corporate Finance & Strategy</h3>
+                            <p class="text-gray-400 text-sm">Focusing on investment banking, equity research, and private equity. Building hard skills in financial modeling and restructuring.</p>
                         </div>
-                        <!-- Left Arrow -->
-                        <button id="scroll-left" class="absolute top-1/2 left-0 -translate-y-1/2 bg-gray-800/50 hover:bg-gray-800/80 p-2 rounded-full transition-all duration-300 z-10">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                            </svg>
-                        </button>
-                        <!-- Right Arrow -->
-                        <button id="scroll-right" class="absolute top-1/2 right-0 -translate-y-1/2 bg-gray-800/50 hover:bg-gray-800/80 p-2 rounded-full transition-all duration-300 z-10">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </button>
+                        <div class="mt-8 flex gap-2 flex-wrap">
+                            <span class="px-3 py-1 bg-white/10 rounded-full text-xs">CFA L1</span>
+                            <span class="px-3 py-1 bg-white/10 rounded-full text-xs">Company Secretary</span>
+                        </div>
                     </div>
-                    <p class="text-gray-500 text-sm mt-4 italic">Drag or use arrows to view</p>
-                </section>
 
-                <!-- Mini Project Section -->
-                <section id="project" class="text-center card rounded-2xl p-8 md:p-12">
-                    <h3 class="text-2xl md:text-3xl font-bold mb-4">Check Out My Mini-Project</h3>
-                    <p class="text-gray-400 max-w-xl mx-auto mb-6">
-                        This is a mini-project called Stock Data AI. Check it out!
-                    </p>
-                    <a href="https://website-sage-delta-12.vercel.app/" target="_blank" rel="noopener noreferrer" class="inline-block bg-white text-black font-bold py-3 px-8 rounded-lg text-lg hover:bg-gray-300 transition-colors duration-300 shadow-lg">
-                        Visit Stock Data AI
-                    </a>
-                </section>
-            </div>
+                    <!-- Tech Stack Card -->
+                    <div class="glass-card p-8 flex flex-col justify-between fade-element">
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Tech Stack</h3>
+                            <p class="text-gray-400 text-sm">Developing multi-agent systems and automating financial analytics.</p>
+                        </div>
+                        <div class="mt-8 flex gap-2 flex-wrap">
+                            <span class="px-3 py-1 bg-white/10 rounded-full text-xs">Python</span>
+                            <span class="px-3 py-1 bg-white/10 rounded-full text-xs">Gemini API</span>
+                            <span class="px-3 py-1 bg-white/10 rounded-full text-xs">MCP</span>
+                        </div>
+                    </div>
+
+                    <!-- Socials Card -->
+                    <div class="glass-card p-8 flex flex-col gap-4 fade-element">
+                        <a href="https://www.linkedin.com/in/gurtej-singh-bhamrah-5a0b85280/" target="_blank" class="flex items-center justify-between group">
+                            <span class="font-medium">LinkedIn</span>
+                            <span class="text-gray-500 group-hover:text-white transition-colors">↗</span>
+                        </a>
+                        <hr class="border-white/10">
+                        <a href="https://github.com/phoenix40469" target="_blank" class="flex items-center justify-between group">
+                            <span class="font-medium">GitHub</span>
+                            <span class="text-gray-500 group-hover:text-white transition-colors">↗</span>
+                        </a>
+                        <hr class="border-white/10">
+                        <a href="https://x.com/tej06_" target="_blank" class="flex items-center justify-between group">
+                            <span class="font-medium">X (Twitter)</span>
+                            <span class="text-gray-500 group-hover:text-white transition-colors">↗</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Photography Masonry Section -->
+            <section id="photography" class="space-y-6">
+                <div class="flex justify-between items-end mb-8 fade-element">
+                    <h2 class="text-2xl font-display font-bold">Lens Work</h2>
+                    <p class="text-sm text-gray-500">Shot on Sony ZV-E10 II</p>
+                </div>
+                
+                <div class="masonry-grid fade-element">
+                    <!-- Replace src with your actual image links -->
+                    <div class="masonry-item glass-card p-2"><img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?q=80&w=800&auto=format&fit=crop" alt="Street Photography" class="rounded-lg w-full"></div>
+                    <div class="masonry-item glass-card p-2"><img src="https://images.unsplash.com/photo-1517409249767-f3d9b4b0eb10?q=80&w=800&auto=format&fit=crop" alt="Cinematic Landscape" class="rounded-lg w-full"></div>
+                    <div class="masonry-item glass-card p-2"><img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=800&auto=format&fit=crop" alt="Event Photography" class="rounded-lg w-full"></div>
+                    <div class="masonry-item glass-card p-2"><img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?q=80&w=800&auto=format&fit=crop" alt="Urban Architecture" class="rounded-lg w-full"></div>
+                </div>
+            </section>
+
+            <!-- Bookshelf Section -->
+            <section id="bookshelf" class="space-y-6 overflow-hidden">
+                <h2 class="text-2xl font-display font-bold mb-8 fade-element">Currently Reading</h2>
+                
+                <!-- Native Scroll-Snap Container -->
+                <div id="bookshelf-container" class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 fade-element hide-scrollbar">
+                    <img src="https://m.media-amazon.com/images/I/71XEsXS5RlL.jpg" class="h-64 snap-center rounded shadow-lg hover:-translate-y-2 transition-transform cursor-pointer" alt="The Psychology of Money">
+                    <img src="https://m.media-amazon.com/images/I/81wr8n5+vhL.jpg" class="h-64 snap-center rounded shadow-lg hover:-translate-y-2 transition-transform cursor-pointer" alt="Coffee Can Investing">
+                    <img src="https://m.media-amazon.com/images/I/51lUeX6L2BL.jpg" class="h-64 snap-center rounded shadow-lg hover:-translate-y-2 transition-transform cursor-pointer" alt="Naval Ravikant">
+                    <img src="https://m.media-amazon.com/images/I/61J3Uu4jOLL.jpg" class="h-64 snap-center rounded shadow-lg hover:-translate-y-2 transition-transform cursor-pointer" alt="48 Laws of Power">
+                    <img src="https://m.media-amazon.com/images/I/81l3rZK4lnL.jpg" class="h-64 snap-center rounded shadow-lg hover:-translate-y-2 transition-transform cursor-pointer" alt="The Alchemist">
+                </div>
+            </section>
+
         </main>
         
-        <!-- Footer -->
-        <footer class="text-center p-6 md:p-8 text-gray-500">
-            <p>&copy; 2025 Gurtej Singh. All Rights Reserved.</p>
+        <footer class="border-t border-white/10 text-center p-8 text-sm text-gray-500 font-mono">
+            &copy; 2026 Gurtej Singh. Built for deployment.
         </footer>
     </div>
 
-    <!-- JavaScript for Bookshelf Drag -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const slider = document.getElementById('bookshelf-container');
-            const scrollLeftBtn = document.getElementById('scroll-left');
-            const scrollRightBtn = document.getElementById('scroll-right');
-
-            if (slider) {
-                let isDown = false;
-                let startX;
-                let scrollLeft;
-
-                slider.addEventListener('mousedown', (e) => {
-                    isDown = true;
-                    slider.style.cursor = 'grabbing';
-                    startX = e.pageX - slider.offsetLeft;
-                    scrollLeft = slider.scrollLeft;
-                });
-
-                slider.addEventListener('mouseleave', () => {
-                    isDown = false;
-                    slider.style.cursor = 'grab';
-                });
-
-                slider.addEventListener('mouseup', () => {
-                    isDown = false;
-                    slider.style.cursor = 'grab';
-                });
-
-                slider.addEventListener('mousemove', (e) => {
-                    if (!isDown) return;
-                    e.preventDefault();
-                    const x = e.pageX - slider.offsetLeft;
-                    const walk = (x - startX) * 2; // The multiplier makes scrolling faster
-                    slider.scrollLeft = scrollLeft - walk;
-                });
-
-                // Arrow button functionality
-                if (scrollLeftBtn && scrollRightBtn) {
-                    const scrollAmount = 300; // pixels to scroll
-
-                    scrollLeftBtn.addEventListener('click', () => {
-                        slider.scrollBy({
-                            left: -scrollAmount,
-                            behavior: 'smooth'
-                        });
-                    });
-
-                    scrollRightBtn.addEventListener('click', () => {
-                        slider.scrollBy({
-                            left: scrollAmount,
-                            behavior: 'smooth'
-                        });
-                    });
-                }
-            }
-        });
-    </script>
-
+    <script src="script.js"></script>
 </body>
 </html>

@@ -21,6 +21,10 @@
             --glass-border: rgba(255, 255, 255, 0.08);
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-dark);
@@ -39,7 +43,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-size: 40px 40px; /* Grid spacing */
+            background-size: 40px 40px;
             background-image:
                 linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
@@ -94,7 +98,7 @@
             }
         }
 
-        /* 5. Masonry Grid (CSS Columns) */
+        /* 5. Masonry Grid */
         .masonry-grid {
             column-count: 1;
             column-gap: 1.5rem;
@@ -116,7 +120,6 @@
             display: none;
         }
 
-        /* Pre-state for JS Intersection Observer */
         .fade-element {
             opacity: 0;
             transform: translateY(20px);
@@ -136,12 +139,12 @@
     <div class="content-wrapper">
         <!-- Navigation -->
         <header class="glass-nav fixed top-0 left-0 right-0 z-50">
-            <nav class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <nav class="max-w-7xl mx-auto px-6 py-4 flex flex-wrap justify-between items-center gap-4">
                 <a href="#hero" class="text-xl font-bold font-display tracking-tight">Gurtej Singh</a>
-                <div class="flex items-center space-x-6 text-sm text-gray-300">
-                    <a href="https://website-sage-delta-12.vercel.app/" target="_blank" class="hover:text-white transition-colors">Stock Data AI ↗</a>
-                    <a href="#about" class="hover:text-white transition-colors">About</a>
-                    <a href="#bookshelf" class="hover:text-white transition-colors">Bookshelf</a>
+                <div class="flex items-center space-x-4 md:space-x-6 text-sm text-gray-300 overflow-x-auto hide-scrollbar">
+                    <a href="#projects" class="hover:text-white transition-colors whitespace-nowrap">Projects</a>
+                    <a href="#about" class="hover:text-white transition-colors whitespace-nowrap">About</a>
+                    <a href="#bookshelf" class="hover:text-white transition-colors whitespace-nowrap">Bookshelf</a>
                 </div>
             </nav>
         </header>
@@ -157,15 +160,15 @@
             </p>
         </section>
 
-        <main class="max-w-7xl mx-auto px-6 pb-32 space-y-32">
+        <main class="max-w-7xl mx-auto px-6 pb-32 space-y-24 md:space-y-32">
             
-            <!-- Bento Grid Section -->
-            <section id="about" class="space-y-6">
+            <!-- Bento Grid Section (About) -->
+            <section id="about" class="space-y-6 pt-10 mt-[-40px]">
                 <h2 class="text-2xl font-display font-bold mb-8 fade-element">The Architecture</h2>
                 
                 <div class="bento-grid">
                     <!-- Finance Card -->
-                    <div class="glass-card bento-col-span-2 p-8 flex flex-col justify-between fade-element">
+                    <div class="glass-card bento-col-span-2 p-6 md:p-8 flex flex-col justify-between fade-element">
                         <div>
                             <h3 class="text-xl font-bold mb-2">Corporate Finance & Strategy</h3>
                             <p class="text-gray-400 text-sm">Focusing on investment banking, equity research, and private equity. Building hard skills in financial modeling and restructuring.</p>
@@ -177,7 +180,7 @@
                     </div>
 
                     <!-- Tech Stack Card -->
-                    <div class="glass-card p-8 flex flex-col justify-between fade-element">
+                    <div class="glass-card p-6 md:p-8 flex flex-col justify-between fade-element">
                         <div>
                             <h3 class="text-xl font-bold mb-2">Tech Stack</h3>
                             <p class="text-gray-400 text-sm">Developing multi-agent systems and automating financial analytics.</p>
@@ -190,7 +193,7 @@
                     </div>
 
                     <!-- Socials Card -->
-                    <div class="glass-card p-8 flex flex-col gap-4 fade-element">
+                    <div class="glass-card p-6 md:p-8 flex flex-col gap-4 fade-element">
                         <a href="https://www.linkedin.com/in/gurtej-singh-bhamrah-5a0b85280/" target="_blank" class="flex items-center justify-between group">
                             <span class="font-medium">LinkedIn</span>
                             <span class="text-gray-500 group-hover:text-white transition-colors">↗</span>
@@ -214,9 +217,36 @@
                 </div>
             </section>
 
+            <!-- Projects Section (Mobile Optimized Embed) -->
+            <section id="projects" class="space-y-6 pt-10 mt-[-40px]">
+                <h2 class="text-2xl font-display font-bold mb-8 fade-element">Projects & Deployment</h2>
+                
+                <div class="glass-card p-4 md:p-8 fade-element">
+                    <!-- Responsive Iframe Wrapper -->
+                    <!-- Max width is set to 504px to match your original dimensions on desktop, but allows shrinking on mobile -->
+                    <div class="w-full max-w-[504px] mx-auto bg-white/5 rounded-xl overflow-hidden shadow-2xl">
+                        <!-- Width changed to 100% so it fits phone screens -->
+                        <iframe 
+                            src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7500975523905511425" 
+                            height="693" 
+                            width="100%" 
+                            frameborder="0" 
+                            allowfullscreen="" 
+                            title="Embedded post">
+                        </iframe>
+                    </div>
+                    
+                    <div class="text-center mt-8">
+                        <a href="https://website-sage-delta-12.vercel.app/" target="_blank" class="inline-block px-6 py-3 bg-white text-black font-semibold rounded-lg hover:bg-gray-200 transition-colors text-sm md:text-base">
+                            View Stock Data AI Project
+                        </a>
+                    </div>
+                </div>
+            </section>
+
             <!-- Photography Masonry Section -->
-            <section id="photography" class="space-y-6">
-                <div class="flex justify-between items-end mb-8 fade-element">
+            <section id="photography" class="space-y-6 pt-10 mt-[-40px]">
+                <div class="flex flex-wrap justify-between items-end gap-2 mb-8 fade-element">
                     <h2 class="text-2xl font-display font-bold">Lens Work</h2>
                     <p class="text-sm text-gray-500">Shot on Sony ZV-E10 II</p>
                 </div>
@@ -231,18 +261,18 @@
             </section>
 
             <!-- Bookshelf Section -->
-            <section id="bookshelf" class="space-y-6 overflow-hidden">
+            <section id="bookshelf" class="space-y-6 pt-10 mt-[-40px] overflow-hidden">
                 <h2 class="text-2xl font-display font-bold mb-8 fade-element">Currently Reading</h2>
                 
                 <!-- Native Scroll-Snap Container -->
                 <div id="bookshelf-container" class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 fade-element hide-scrollbar">
-                    <img src="https://m.media-amazon.com/images/I/71XEsXS5RlL.jpg" class="h-64 snap-center rounded shadow-lg hover:-translate-y-2 transition-transform cursor-pointer" alt="The Psychology of Money">
-                    <img src="https://m.media-amazon.com/images/I/81wr8n5+vhL.jpg" class="h-64 snap-center rounded shadow-lg hover:-translate-y-2 transition-transform cursor-pointer" alt="Coffee Can Investing">
-                    <img src="https://m.media-amazon.com/images/I/51lUeX6L2BL.jpg" class="h-64 snap-center rounded shadow-lg hover:-translate-y-2 transition-transform cursor-pointer" alt="Naval Ravikant">
-                    <img src="https://m.media-amazon.com/images/I/61J3Uu4jOLL.jpg" class="h-64 snap-center rounded shadow-lg hover:-translate-y-2 transition-transform cursor-pointer" alt="48 Laws of Power">
-                    <img src="https://m.media-amazon.com/images/I/81l3rZK4lnL.jpg" class="h-64 snap-center rounded shadow-lg hover:-translate-y-2 transition-transform cursor-pointer" alt="The Alchemist">
+                    <img src="https://m.media-amazon.com/images/I/71XEsXS5RlL.jpg" class="h-48 md:h-64 snap-center rounded shadow-lg hover:-translate-y-2 transition-transform cursor-pointer" alt="The Psychology of Money">
+                    <img src="https://m.media-amazon.com/images/I/81wr8n5+vhL.jpg" class="h-48 md:h-64 snap-center rounded shadow-lg hover:-translate-y-2 transition-transform cursor-pointer" alt="Coffee Can Investing">
+                    <img src="https://m.media-amazon.com/images/I/51lUeX6L2BL.jpg" class="h-48 md:h-64 snap-center rounded shadow-lg hover:-translate-y-2 transition-transform cursor-pointer" alt="Naval Ravikant">
+                    <img src="https://m.media-amazon.com/images/I/61J3Uu4jOLL.jpg" class="h-48 md:h-64 snap-center rounded shadow-lg hover:-translate-y-2 transition-transform cursor-pointer" alt="48 Laws of Power">
+                    <img src="https://m.media-amazon.com/images/I/81l3rZK4lnL.jpg" class="h-48 md:h-64 snap-center rounded shadow-lg hover:-translate-y-2 transition-transform cursor-pointer" alt="The Alchemist">
                 </div>
-                <p class="text-gray-500 text-sm mt-4 italic text-center fade-element">Swipe or drag to view</p>
+                <p class="text-gray-500 text-sm mt-2 italic text-center fade-element">Swipe or drag to view</p>
             </section>
 
         </main>
@@ -256,7 +286,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             
-            // 1. Intersection Observer for Scroll Animations
+            // Intersection Observer for smooth scroll animations
             const observerOptions = {
                 root: null,
                 rootMargin: "0px",
@@ -267,7 +297,7 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add("visible");
-                        observer.unobserve(entry.target); // Run once
+                        observer.unobserve(entry.target); 
                     }
                 });
             }, observerOptions);
@@ -275,7 +305,7 @@
             const fadeElements = document.querySelectorAll(".fade-element");
             fadeElements.forEach(el => observer.observe(el));
 
-            // 2. Desktop Drag-to-Scroll for Bookshelf
+            // Desktop Drag-to-Scroll for Bookshelf
             const slider = document.getElementById('bookshelf-container');
             
             if (slider) {

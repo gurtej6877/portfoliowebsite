@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Stock Data AI — a transparent market-research dashboard by Gurtej Singh."><title>Stock Data AI — Gurtej Singh</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css">
+</head>
+<body class="app-body">
+  <div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div><div class="grid-background" aria-hidden="true"></div><div class="noise" aria-hidden="true"></div>
+  <header class="app-shell app-nav"><a class="app-brand" href="index.html"><span class="app-mark">SD</span> Stock Data AI</a><nav class="app-nav-links"><a href="projects.html">Projects</a><a href="index.html">Portfolio ↗</a></nav></header>
+  <main class="app-shell">
+    <section class="app-hero"><p class="eyebrow"><span class="status-dot"></span> Market research, simplified</p><h1>See the data.<br><em>Own the context.</em></h1><p>Search a US-listed company or ticker to surface price action, core fundamentals, and a transparent rule-based opinion.</p></section>
+    <section class="app-board" aria-label="Stock research dashboard">
+      <div class="app-board-head"><span>STOCK DATA AI / TERMINAL</span><b id="key-indicator">API KEY REQUIRED</b></div>
+      <form id="stock-form" class="search-form"><input id="stock-input" type="search" autocomplete="off" placeholder="Search a company or ticker — e.g. MSFT, Apple, NVDA" aria-label="Company or ticker"><button class="button button-light" type="submit">Analyze <span>↗</span></button></form>
+      <div id="app-results" class="app-results"><div class="empty-state"><span>⌁</span><p>Set a personal Finnhub API key below, then search any US company or ticker to begin.</p></div></div>
+    </section>
+    <section class="app-info">
+      <article><p class="eyebrow">HOW IT WORKS</p><h2>Built for a fast first pass.</h2><p>Enter a ticker or company. Stock Data AI finds the best match, gathers its market snapshot and valuations, then explains how a few selected factors shape a simple opinion.</p></article>
+      <article><p class="eyebrow">YOUR FINNHUB API KEY</p><h2>Keep your key on your device.</h2><p>Your free Finnhub key is saved only in this browser’s local storage. It is never written into this website’s code or sent anywhere beyond Finnhub’s API.</p><form id="key-form" class="key-form"><input id="api-key" type="password" autocomplete="off" placeholder="Paste your Finnhub API key" aria-label="Finnhub API key"><button type="submit">Save</button><button type="button" id="clear-key">Clear</button></form><p id="key-status" class="key-status">No key saved.</p></article>
+    </section>
+  </main>
+  <footer class="app-shell app-footer"><span>© <span data-year></span> Gurtej Singh</span><span>Educational research only — not financial advice.</span></footer>
+  <script src="script.js"></script><script src="stock-data-ai.js"></script>
+</body></html>
